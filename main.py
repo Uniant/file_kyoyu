@@ -10,10 +10,11 @@ import random
 app = Flask(__name__)
 #my local ip adress
 my_ip = socket.gethostbyname(socket.gethostname())
+server_port = random.randint(50000,60000) #To prevent duplication of port numbers.
+print("Local IP address use: " + my_ip) #The IP address to use when opening the server.
+print("Port number use: " + str(server_port)) #The port number to use when opening the server.
 select_file = []
 file_n = 0
-
-server_port = random.randint(0,9999)
 
 #make a qrcode
 file_name = "qr_code.png" #qr code file
@@ -21,7 +22,8 @@ qr_string = "http://" + str(my_ip) + ":" +str(server_port) + "/"
 img = qrcode.make(qr_string) #Make qrcode
 img.save(file_name)	#Save a images
 current_dir = os.getcwd() #Save the this directory
-print("fond error!") # no error!
+print("No error found.") # no error!
+
 
 html = ""
 
@@ -137,23 +139,24 @@ if __name__ == '__main__':
 
     #share button
     share_button = tk.Button(text="共有(このウィンドウを閉じる)",command=file_share, font=("UTF-8",10))
-    share_button.place(x=100,y=130)
+    share_button.place(x=10,y=150)
 
     #use infomation
-    use_info = tk.Label(text='''使い方 :① [参照]ボタンを押してファイルを選ぶ 。
-②スマホで表示されているQRコードを読み込む
-③[共有(ウィンドウを閉じる)]ボタンを押す
-④スマホからQRコードのURLにアクセスする''')
-    use_info.place(x=0,y=180)
+    use_info = tk.Label(
+        text='''使い方: \n① [参照]ボタンを押してファイルを選ぶ\n② スマホで表示されているQRコードを読み込む\n③ [共有(ウィンドウを閉じる)]ボタンを押す\n④ スマホからQRコードのURLにアクセスする''',
+        justify='left',
+        font=("UTF-8",10)
+    )
+    use_info.place(x=5,y=190)
     
     #share explanation
-    share_letter = tk.Label(text='''注意 : 携帯などの端末でQRコードを読み取っても、
-[共有(ウィンドウを閉じる)]ボタンを押
-さないとファイルは共有されません。
+    share_letter = tk.Label(
+        text='''！注意！ \n[共有(ウィンドウを閉じる)]ボタンを押さない限り、\n他の端末にファイルは共有されません。\nファイルを共有するときは共有する他の端末と\n同じネットワークに接続してください。''',
+        foreground="#ff0000",
+        font=("UTF-8",10)
+    )
 
-ファイルを共有するときは、共有する端末と同じ
-ルーターに接続してください。''',font=("UTF-8",10),foreground="#ff0000")
-    share_letter.place(x=0,y=250)
+    share_letter.place(x=0,y=270)
 
     #Display qrcode
     qr_code_img = tk.PhotoImage(file="qr_code.png")
