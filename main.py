@@ -8,8 +8,7 @@ import qrcode, os
 import random
  
 app = Flask(__name__)
-#my local ip adress
-my_ip = socket.gethostbyname(socket.gethostname())
+my_ip = socket.gethostbyname(socket.gethostname()) #my local ip adress
 server_port = random.randint(50000,60000) #To prevent duplication of port numbers.
 print("Local IP address use: " + my_ip) #The IP address to use when opening the server.
 print("Port number use: " + str(server_port)) #The port number to use when opening the server.
