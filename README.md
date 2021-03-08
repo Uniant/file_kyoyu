@@ -25,4 +25,5 @@
 必要なライブラリ(インストール方法)
 
 pip install flask
+
 pip install qrcode
