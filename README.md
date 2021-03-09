@@ -53,3 +53,5 @@ cx_freeze
 ```
 python setup_cx.py build
 ```
+
+py2exe python3.9 動作確認 
