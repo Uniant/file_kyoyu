@@ -8,12 +8,12 @@ import qrcode, os
 import random
  
 app = Flask(__name__)
-#my local ip adress
-my_ip = socket.gethostbyname(socket.gethostname())
+my_ip = socket.gethostbyname(socket.gethostname()) #my local ip adress
+server_port = random.randint(50000,60000) #To prevent duplication of port numbers.
+print("Local IP address use: " + my_ip) #The IP address to use when opening the server.
+print("Port number use: " + str(server_port)) #The port number to use when opening the server.
 select_file = []
 file_n = 0
-
-server_port = random.randint(0,9999)
 
 #make a qrcode
 file_name = "qr_code.png" #qr code file
@@ -21,7 +21,8 @@ qr_string = "http://" + str(my_ip) + ":" +str(server_port) + "/"
 img = qrcode.make(qr_string) #Make qrcode
 img.save(file_name)	#Save a images
 current_dir = os.getcwd() #Save the this directory
-print("fond error!") # no error!
+print("No error found.") # no error!
+
 
 html = ""
 
@@ -83,7 +84,7 @@ def file_share():
             download_list = download_list + '''
         <h3><svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="width: 64px; height: 64px; opacity: 1;" xml:space="preserve">
         <g>
-	<path class="st0" d="M503.283,233.406c-8.198-11.548-21.106-18.678-35.108-19.704v-44.571c0.007-12.334-5.052-23.663-13.14-31.724
+	    <path class="st0" d="M503.283,233.406c-8.198-11.548-21.106-18.678-35.108-19.704v-44.571c0.007-12.334-5.052-23.663-13.14-31.724
 		c-8.068-8.088-19.39-13.14-31.724-13.134H220.167c-2.495,0-4.916-0.951-6.755-2.681l0.013,0.021L177.73,88.139
 		c-8.321-7.794-19.287-12.136-30.684-12.136H88.698c-12.334-0.007-23.663,5.053-31.724,13.141
 		c-8.088,8.06-13.147,19.39-13.14,31.724v92.834c-14.002,1.026-26.911,8.156-35.109,19.711C2.981,241.509,0,251.094,0,260.768
@@ -94,28 +95,28 @@ def file_share():
 		C512,251.094,509.026,241.509,503.283,233.406z M433.168,213.497H78.838v-92.628c0.007-2.776,1.074-5.128,2.885-6.974
 		c1.846-1.812,4.198-2.878,6.974-2.885h58.348c2.509,0,4.908,0.951,6.748,2.667l35.69,33.468l0.013,0.02
 		c8.3,7.76,19.26,12.115,30.671,12.115H423.31c2.776,0.006,5.134,1.074,6.974,2.885c1.812,1.839,2.879,4.191,2.885,6.967V213.497z" style="fill: rgb(0, 70, 255);"></path>
-</g>
-</svg>
-                <a href="download?f='''+str(n)+'''">'''+file_name(select_file[n])+'''</a></h3>
-'''
+        </g>
+        </svg>
+        <a href="download?f='''+str(n)+'''">'''+file_name(select_file[n])+'''</a></h3>
+        '''
             pass
-        html = '''
+        html = (
+        '''
         <html>
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width">
             </head>
-        
             <body>
                 <h1>ファイル共有</h1>
-<style type="text/css">
-	.st0{fill:#4B4B4B;}
-</style>
+            <style type="text/css">
+	            .st0{fill:#4B4B4B;}
+            </style>
             '''+download_list+'''
             </body>
         </html>
-
         '''
+        )
         root.destroy()
     pass
 
@@ -137,23 +138,24 @@ if __name__ == '__main__':
 
     #share button
     share_button = tk.Button(text="共有(このウィンドウを閉じる)",command=file_share, font=("UTF-8",10))
-    share_button.place(x=100,y=130)
+    share_button.place(x=10,y=150)
 
     #use infomation
-    use_info = tk.Label(text='''使い方 :① [参照]ボタンを押してファイルを選ぶ 。
-②スマホで表示されているQRコードを読み込む
-③[共有(ウィンドウを閉じる)]ボタンを押す
-④スマホからQRコードのURLにアクセスする''')
-    use_info.place(x=0,y=180)
+    use_info = tk.Label(
+        text='''使い方: \n① [参照]ボタンを押してファイルを選ぶ\n② スマホで表示されているQRコードを読み込む\n③ [共有(ウィンドウを閉じる)]ボタンを押す\n④ スマホからQRコードのURLにアクセスする''',
+        justify='left',
+        font=("UTF-8",10)
+    )
+    use_info.place(x=5,y=190)
     
     #share explanation
-    share_letter = tk.Label(text='''注意 : 携帯などの端末でQRコードを読み取っても、
-[共有(ウィンドウを閉じる)]ボタンを押
-さないとファイルは共有されません。
+    share_letter = tk.Label(
+        text='''！注意！ \n[共有(ウィンドウを閉じる)]ボタンを押さない限り、\n他の端末にファイルは共有されません。\nファイルを共有するときは共有する他の端末と\n同じネットワークに接続してください。''',
+        foreground="#ff0000",
+        font=("UTF-8",10)
+    )
 
-ファイルを共有するときは、共有する端末と同じ
-ルーターに接続してください。''',font=("UTF-8",10),foreground="#ff0000")
-    share_letter.place(x=0,y=250)
+    share_letter.place(x=0,y=270)
 
     #Display qrcode
     qr_code_img = tk.PhotoImage(file="qr_code.png")
