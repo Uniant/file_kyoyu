@@ -1,11 +1,7 @@
-from tkinter import filedialog
-from tkinter import messagebox
+from tkinter import filedialog, messagebox
 import tkinter as tk
-import socket
 from flask import Flask, Response, make_response, request
-import sys
-import qrcode, os
-import random
+import socket, sys, qrcode, os, random
  
 app = Flask(__name__)
 
@@ -32,17 +28,14 @@ html = ""
 def file_name(file):
     name = ""
     n = len(file)
-    print(file[n-1])
-    print(file)
+    print(file[n-1], file)
     while True:
         if file[n-1] ==  '/' :
             name = file[n:len(file)]
             break
-        
-        if n == 1:
+        elif n == 1:
             break
-        
-        n = n - 1
+        n -= 1
         pass
     print(name)
     return name
@@ -79,7 +72,7 @@ def file_share():
     global select_file
     
     if select_file == []:
-        res = messagebox.showerror("error", "ファイルが選択されていません。")
+        res = messagebox.showerror("error", "ファイルが選択されていません。") # where is this used?
     else:
         download_list = ""
         for n in range(len(select_file)):
