@@ -8,6 +8,9 @@ import qrcode, os
 import random
  
 app = Flask(__name__)
+
+print("このウィンドウは、共有が終わるまで閉じないでください。")
+
 my_ip = socket.gethostbyname(socket.gethostname()) #my local ip adress
 server_port = random.randint(50000,60000) #To prevent duplication of port numbers.
 print("Local IP address use: " + my_ip) #The IP address to use when opening the server.
@@ -22,7 +25,6 @@ img = qrcode.make(qr_string) #Make qrcode
 img.save(file_name)	#Save a images
 current_dir = os.getcwd() #Save the this directory
 print("No error found.") # no error!
-
 
 html = ""
 
@@ -139,6 +141,13 @@ if __name__ == '__main__':
     #share button
     share_button = tk.Button(text="共有(このウィンドウを閉じる)",command=file_share, font=("UTF-8",10))
     share_button.place(x=10,y=150)
+
+    #share_url
+    share_url = tk.Label(
+        text="共有URL : http://" + str(my_ip) + ":" +str(server_port) + "/",
+        font=("UTF-8",20)
+    )
+    share_url.place(x=5,y=10)
 
     #use infomation
     use_info = tk.Label(
