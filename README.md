@@ -24,10 +24,32 @@
 
 ## 実行
 
-実行するには(今のところ) python3が必要です。
+改造するには python3が必要です。
 
 必要なライブラリ(インストール方法)
 
 pip install flask
 
 pip install qrcode
+
+## py2exe または、cx_freezeでexe化
+
+exe化するには、flask(jinja2)の依存関係でエラーが出てしまう可能性があるので、
+
+```
+pythonがインストールされているデレクトリ\Lib\site-packages\jinja2\__init__.py
+```
+に、 ```import ext```を追加してください。
+
+そして、このコマンドでexeファイルが出来ると思います。
+
+
+py2exe
+```
+python setup_py2exe.py py2exe
+```
+
+cx_freeze
+```
+python setup_cx.py build
+```
