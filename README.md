@@ -37,7 +37,7 @@ pip install qrcode
 exe化するには、flask(jinja2)の依存関係でエラーが出てしまう可能性があるので、
 
 ```
-pythonがインストールされているデレクトリ\Lib\site-packages\jinja2\__init__.py
+pythonがインストールされているディレクトリ\Lib\site-packages\jinja2\__init__.py
 ```
 に、 ```import ext```を追加してください。
 
@@ -54,4 +54,4 @@ cx_freeze
 python setup_cx.py build
 ```
 
-py2exe python3.9 動作確認 
+py2exe,cx_freeze python3.9で動作確認 
