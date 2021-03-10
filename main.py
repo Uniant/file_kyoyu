@@ -28,7 +28,7 @@ html = ""
 def file_name(file):
     name = ""
     n = len(file)
-    print(file[n-1], file)
+    print(file)
     while True:
         if file[n-1] ==  '/' :
             name = file[n:len(file)]
