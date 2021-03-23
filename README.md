@@ -55,3 +55,9 @@ python setup_cx.py build
 ```
 
 py2exe,cx_freeze python3.9で動作確認 
+
+#Pyinstallerでexe化
+
+```
+pyinstaller --onefile --noconsole --icon=icon.ico main.py
+```
