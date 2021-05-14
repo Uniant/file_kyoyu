@@ -61,3 +61,5 @@ py2exe,cx_freeze python3.9で動作確認
 ```
 pyinstaller --onefile --noconsole --icon=icon.ico main.py
 ```
+
+5月15日 uniant内でこのプロジェクトの開発が活発でないためこのリポジトリを公開しました。by rihitosan
