@@ -1,6 +1,6 @@
 # ファイルを共有できるツール
 
-これは、同じlan内でファイルを共有できるtoolです。
+これは、同じ LAN 内でファイルを共有できるツールです。
 
 ![logo](https://raw.githubusercontent.com/rihitosan/file_kyouyuu/main/logo.png)
 
@@ -8,11 +8,11 @@
 
 ① [参照]ボタンを押してファイルを選ぶ 。
 
-②スマホで表示されているQRコードを読み込む
+②スマートフォンで表示されている QR コードを読み込む
 
 ③[共有(ウィンドウを閉じる)]ボタンを押す
 
-④スマホからQRコードのURLにアクセスする
+④スマートフォンから QR コードの URL にアクセスする
 
 ## 注意
 
@@ -24,7 +24,7 @@
 
 ## 実行
 
-改造するには python3が必要です。
+改造するには Python 3 が必要です。
 
 必要なライブラリ(インストール方法)
 
@@ -32,16 +32,16 @@ pip install flask
 
 pip install qrcode
 
-## py2exe または、cx_freezeでexe化
+## py2exe または、cx_freeze で exe 化
 
-exe化するには、flask(jinja2)の依存関係でエラーが出てしまう可能性があるので、
+exe 化するには、flask（jinja2）の依存関係でエラーが出てしまう可能性があるので、
 
 ```
-pythonがインストールされているディレクトリ\Lib\site-packages\jinja2\__init__.py
+(python がインストールされているディレクトリ)\Lib\site-packages\jinja2\__init__.py
 ```
-に、 ```import ext```を追加してください。
+に、 ```import ext``` を追加してください。
 
-そして、このコマンドでexeファイルが出来ると思います。
+そして、このコマンドで exe ファイルが出来ます。
 
 
 py2exe
@@ -54,4 +54,12 @@ cx_freeze
 python setup_cx.py build
 ```
 
-py2exe,cx_freeze python3.9で動作確認 
+py2exe, cx_freeze Python 3.9 で動作確認 
+
+# Pyinstaller で exe 化
+
+```
+pyinstaller --onefile --noconsole --icon=icon.ico main.py
+```
+
+5 月 15 日 Uniant 内でこのプロジェクトの開発が活発でないためこのリポジトリを公開しました。by rihitosan
