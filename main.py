@@ -137,14 +137,14 @@ if __name__ == '__main__':
 
     #share_url
     share_url = tk.Label(
-        text="共有URL : http://" + str(my_ip) + ":" +str(server_port) + "/",
+        text="共有 URL : http://" + str(my_ip) + ":" +str(server_port) + "/",
         font=("UTF-8",20)
     )
     share_url.place(x=5,y=10)
 
     #use infomation
     use_info = tk.Label(
-        text='''使い方: \n① [参照]ボタンを押してファイルを選ぶ\n② スマホで表示されているQRコードを読み込む\n③ [共有(ウィンドウを閉じる)]ボタンを押す\n④ スマホからQRコードのURLにアクセスする''',
+        text='''使い方: \n① [参照]ボタンを押してファイルを選ぶ\n② スマートフォンで表示されている QR コードを読み込む\n③ [共有(ウィンドウを閉じる)]ボタンを押す\n④ スマートフォンから QR コードの URL にアクセスする''',
         justify='left',
         font=("UTF-8",10)
     )
