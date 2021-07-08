@@ -7,7 +7,10 @@ app = Flask(__name__)
 
 print("このウィンドウは、共有が終わるまで閉じないでください。")
 
+
+# ここは要修正が必要です。(適切なホストを自動選択する必要があります。)
 my_ip = socket.gethostbyname(socket.gethostname()) #my local ip adress
+
 server_port = random.randint(50000,60000) #To prevent duplication of port numbers.
 print("Local IP address use: " + my_ip) #The IP address to use when opening the server.
 print("Port number use: " + str(server_port)) #The port number to use when opening the server.
@@ -16,11 +19,11 @@ file_n = 0
 
 #make a qrcode
 file_name = "qr_code.png" #qr code file
-qr_string = "http://" + str(my_ip) + ":" +str(server_port) + "/"
+qr_string = "http://{0}:{1}/".format(str(my_ip),str(server_port))
 img = qrcode.make(qr_string) #Make qrcode
 img.save(file_name)	#Save a images
 current_dir = os.getcwd() #Save the this directory
-print("No error found.") # no error!
+print("No error found.")
 
 html = ""
 
@@ -137,14 +140,14 @@ if __name__ == '__main__':
 
     #share_url
     share_url = tk.Label(
-        text="共有URL : http://" + str(my_ip) + ":" +str(server_port) + "/",
+        text="共有URL : http://{0}:{1}/".format(str(my_ip),str(server_port)),
         font=("UTF-8",20)
     )
     share_url.place(x=5,y=10)
 
     #use infomation
     use_info = tk.Label(
-        text='''使い方: \n① [参照]ボタンを押してファイルを選ぶ\n② スマホで表示されているQRコードを読み込む\n③ [共有(ウィンドウを閉じる)]ボタンを押す\n④ スマホからQRコードのURLにアクセスする''',
+        text="使い方: \n① [参照]ボタンを押してファイルを選ぶ\n② スマホで表示されているQRコードを読み込む\n③ [共有(ウィンドウを閉じる)]ボタンを押す\n④ スマホからQRコードのURLにアクセスする",
         justify='left',
         font=("UTF-8",10)
     )
@@ -152,7 +155,7 @@ if __name__ == '__main__':
     
     #share explanation
     share_letter = tk.Label(
-        text='''！注意！ \n[共有(ウィンドウを閉じる)]ボタンを押さない限り、\n他の端末にファイルは共有されません。\nファイルを共有するときは共有する他の端末と\n同じネットワークに接続してください。''',
+        text="！注意！ \n[共有(ウィンドウを閉じる)]ボタンを押さない限り、\n他の端末にファイルは共有されません。\nファイルを共有するときは共有する他の端末と\n同じネットワークに接続してください。",
         foreground="#ff0000",
         font=("UTF-8",10)
     )
@@ -172,5 +175,6 @@ if __name__ == '__main__':
     root.mainloop()
 
     #run
-    app.run(debug=False, host=my_ip, port=server_port)
+    #Threadedを有効にして同時アクセスも対応出来るように
+    app.run(debug=False, host=my_ip, port=server_port, threaded=True)
     pass
